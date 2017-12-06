@@ -27,7 +27,7 @@ public class TestingMain {
         } else {
             System.out.println("Error! - dodawanie");
         }
-        if (subtractTestResult==(3)) {
+        if (subtractTestResult==3) {
             System.out.println("Test odejmowania: OK");
         } else {
             System.out.println("Error! - odejmowania");
