@@ -20,11 +20,10 @@ public class CollectionTestSuite {
         //Given
         OddNumbersExterminator exterminator=new OddNumbersExterminator();
         ArrayList <Integer> numbers = new ArrayList<>();
-        ArrayList<Integer> evenNumbers = exterminator.exterminate(numbers);
         //When
-        boolean result =evenNumbers.isEmpty() ;
+        ArrayList<Integer> evenNumbers = exterminator.exterminate(numbers);
         //Then
-        Assert.assertTrue("Lista jest pusta",result);
+        Assert.assertTrue(evenNumbers.isEmpty());
     }
     @Test
     public void testOddNumbersExterminatorNormalList (){
@@ -34,11 +33,10 @@ public class CollectionTestSuite {
         numbers.add(2);
         numbers.add(5);
         numbers.add(6);
-        ArrayList<Integer> evenNumbers = exterminator.exterminate(numbers);
         //When
-        boolean result = evenNumbers.contains(2)&&evenNumbers.contains(6);
+        ArrayList<Integer> evenNumbers = exterminator.exterminate(numbers);
         //Then
-        Assert.assertTrue(result);
+        Assert.assertTrue(evenNumbers.contains(2)&&evenNumbers.contains(6)&&(!evenNumbers.contains(5)));
     }
 
 }

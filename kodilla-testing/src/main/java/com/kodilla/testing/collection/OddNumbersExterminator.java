@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class OddNumbersExterminator {
 
-
-
-
     public ArrayList<Integer> exterminate (ArrayList<Integer> example) {
         ArrayList <Integer> evenNumbers = new ArrayList<>();
         if (example.isEmpty()){
