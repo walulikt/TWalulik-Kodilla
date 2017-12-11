@@ -17,7 +17,7 @@ public class ForumStatisticsTestSuite {
     public static void after (){
         System.out.println("Koniec testów");
     }
-    int testCount=0;
+    static int testCount=0;
     @Before
     public void beforeTest (){
         testCount++;
