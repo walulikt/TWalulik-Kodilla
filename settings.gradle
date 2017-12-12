@@ -1,3 +1,4 @@
 include 'kodilla-testing'
 include 'User'
+include 'kodilla-stream'
 
