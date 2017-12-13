@@ -8,10 +8,10 @@ public class StreamMain {
     public static void main (String [] args){
         PoemBeautifier poemBeautifier=new PoemBeautifier();
 
-        poemBeautifier.beautify1( "Alfabet",text -> "ABC"+text+"ABC");
-        poemBeautifier.beautify2( "litle text",text -> text.toUpperCase());
-        poemBeautifier.beautify3( "Good day",text -> text.substring(0,4));
-        poemBeautifier.beautify4( "Piasek do maty",text -> text.replace('a','e'));
+        poemBeautifier.beautify( "Alfabet",text -> "ABC"+text+"ABC");
+        poemBeautifier.beautify( "litle text",text -> text.toUpperCase());
+        poemBeautifier.beautify( "Good day",text -> text.substring(0,4));
+        poemBeautifier.beautify( "Piasek do maty",text -> text.replace('a','e'));
     }
 }
 
