@@ -12,7 +12,7 @@ public final class Continent {
             return theContinent;
         }
 
-    public List<Country> addConuntry() {
+    public List<Country> getTheContinent() {
 
         return theContinent;
     }

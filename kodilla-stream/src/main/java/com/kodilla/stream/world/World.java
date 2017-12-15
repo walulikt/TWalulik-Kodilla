@@ -9,16 +9,12 @@ public class World implements PeopleQuantity{
 
     List<Continent> theWorld =new ArrayList<>();
 
-    public List<Continent> getTheWorld(Continent continent) {
-        theWorld.add(continent);
-        return theWorld;
-    }
 
     @Override
     public BigDecimal getPeopleQuantity() {
 
         return theWorld.stream()
-                .flatMap(continent -> continent.addConuntry().stream())
+                .flatMap(continent -> continent.getTheContinent().stream())
                 .filter(continent -> continent.equals(this))
                 .map(Country::getPeopleQuantity)
                 .reduce(BigDecimal.ZERO, (sum,current) -> sum.add(current));

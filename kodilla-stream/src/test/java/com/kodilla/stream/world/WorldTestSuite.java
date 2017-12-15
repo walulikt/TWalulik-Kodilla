@@ -39,13 +39,12 @@ public class WorldTestSuite {
         africa.addCountry(tunisia);
         africa.addCountry(maroco);
 
+        World world=new World();
+        List<Continent> theWorld =new ArrayList<>();
 
-        World world = new World();
-        List<Continent> theWorld=new ArrayList<>();
         theWorld.add(asia);
         theWorld.add(europ);
         theWorld.add(africa);
-
 
         //When
 
@@ -55,8 +54,6 @@ public class WorldTestSuite {
         BigDecimal expectedPeopleQuantity = new BigDecimal("3905400000045");
         Assert.assertEquals(expectedPeopleQuantity, world.getPeopleQuantity());
 
-
-
-
     }
+
 }
