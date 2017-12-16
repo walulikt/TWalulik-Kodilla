@@ -7,13 +7,15 @@ import java.util.stream.Stream;
 
 public interface ArrayOperations {
 
-   /* static double getAverage(int[] numbers) {
+    static double getAverage(int[] numbers) {
         IntStream.range(0,numbers.length)
                 .forEach(System.out::print);
        double average = IntStream.range(0,numbers.length)
                 .mapToDouble(k->k)
-                .average();
+               .average()
+               .getAsDouble();
+
 
         return average;
-    }*/
+    }
 }
