@@ -9,15 +9,15 @@ public class ArrayOperationsTestSuite {
     public void testGetAverage () {
         //Given
 
-        ArrayOperations arrayOperationsMock;
-        int [] numbers = {1,2,3,4,5};
+
+        int [] numbers = {100,100,20};
 
 
         // When
         ArrayOperations.getAverage(numbers);
 
         //Then
-        Assert.assertEquals(2,ArrayOperations.getAverage(numbers),0);
+        Assert.assertEquals(60,ArrayOperations.getAverage(numbers),0);
 
 
 
