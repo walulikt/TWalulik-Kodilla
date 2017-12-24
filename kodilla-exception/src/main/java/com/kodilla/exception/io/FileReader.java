@@ -20,9 +20,8 @@ public class FileReader {
         } catch (IOException e) {
             throw new FileReaderException();
         } finally {
-            System.out.println("I am gonna be here... always!");
-        }
+                System.out.println("I am gonna be here... always!");
+  }
 
-
-    }
+ }
 }

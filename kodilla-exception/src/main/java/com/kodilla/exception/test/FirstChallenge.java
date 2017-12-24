@@ -7,7 +7,7 @@ public class FirstChallenge {
         }
         return a/b;
     }
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
 
         FirstChallenge firstChallenge = new FirstChallenge();
 
@@ -17,7 +17,8 @@ public class FirstChallenge {
             System.out.println(result);
         } catch (ArithmeticException e) {
             System.out.println("Niedozwolone dzielenie przez '0'."+e);
+        }finally {
+            System.out.println("Czy to było proste działanie?");
         }
-
-    }*/
+    }
 }
