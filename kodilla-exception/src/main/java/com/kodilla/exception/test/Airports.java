@@ -8,8 +8,7 @@ public class Airports {
     private String airportName;
     private Boolean isAvailbe;
 
-    Map<String, Boolean> airports;
-
+    Map<String, Boolean> airportsMap = new HashMap<>();
 
 
     public String getAirportName() {
@@ -35,7 +34,7 @@ public class Airports {
         return getAirportName().hashCode();
     }
 
-    public Map<String, Boolean> getAirports() {
-        return airports;
+    public Map<String, Boolean> getAirportsMap() {
+        return airportsMap;
     }
 }
