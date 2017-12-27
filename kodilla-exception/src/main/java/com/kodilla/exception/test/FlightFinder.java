@@ -19,14 +19,14 @@ public class FlightFinder {
             for (Map.Entry<String, Boolean> theFlightDepurter: airports.getAirportsMap().entrySet()) {
                 if (flight.getDepartureAirport().equals(theFlightDepurter.getKey())) {
                     System.out.println("Wylot z lotniska: " + theFlightDepurter.getKey() + " jest dostępny: " + theFlightDepurter.getValue());
-                } else if ((!flight.getDepartureAirport().equals(theFlightDepurter.getKey())) || (!flight.getArrivalAirport().equals(theFlightDepurter.getKey()))) {
+                } else if (!flight.getDepartureAirport().equals(theFlightDepurter.getKey())) {
                     throw new RouteNotFoundException();
                 }
             }
             for (Map.Entry<String, Boolean> theFlightArrival: airports.getAirportsMap().entrySet()) {
                 if (flight.getArrivalAirport().equals(theFlightArrival.getKey())) {
                     System.out.println("Lądowanie na lotnisku: " + theFlightArrival.getKey() + " jest dostępne: " + theFlightArrival.getValue());
-                } else if ((!flight.getDepartureAirport().equals(theFlightArrival.getKey())) || (!flight.getArrivalAirport().equals(theFlightArrival.getKey()))) {
+                } else if (!flight.getArrivalAirport().equals(theFlightArrival.getKey())) {
                     throw new RouteNotFoundException();
                 }
             }
