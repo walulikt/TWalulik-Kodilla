@@ -12,13 +12,14 @@ public class ProductOrderService {
     }
 
     public OrderDto process (final Order order) {
-        boolean orderComplieted = orderSpecyfication.createSpecyfikation(order.getBuyer(),order.getSeller(),order.getTimeOfOrder());
+        boolean orderComplieted = orderSpecyfication.createSpecyfikation(order);
         if(orderComplieted){
             orderInformationService.inform(order.getBuyer(),order.getSeller());
-            orderRepository.createOrderRepo(order.getBuyer(), order.getSeller(),order.getTimeOfOrder());
+            orderRepository.createOrderRepo(order);
             return new OrderDto(order.getSeller(),order.getBuyer(),true);
         } else {
             return new OrderDto(order.getBuyer(),order.getSeller(), false);
         }
     }
+
 }
