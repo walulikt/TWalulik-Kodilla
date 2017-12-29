@@ -2,23 +2,21 @@ package com.kodilla.good.patterns.food2door;
 
 public class PreparationOfDelivery {
 
-    ProductOrdered productOrdered;
+    private ProductOrdered productOrdered;
 
     public PreparationOfDelivery(ProductOrdered productOrdered) {
         this.productOrdered = productOrdered;
     }
 
     public boolean checkInStock (){
-        boolean isProductInStock=true;
-        return isProductInStock;
+        return true;
     }
 
     public boolean sentGift (){
-        double giftValue=productOrdered.getProductPrice()*productOrdered.getProductQuantity();
-        if (giftValue>50){
-            return true;
-        }else {
-            return false;
-        }
+        return productOrdered.getProductPrice()*productOrdered.getProductQuantity()>50;
+    }
+
+    public ProductOrdered getProductOrdered() {
+        return productOrdered;
     }
 }

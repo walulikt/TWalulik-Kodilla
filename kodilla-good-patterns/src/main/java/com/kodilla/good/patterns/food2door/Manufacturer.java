@@ -4,10 +4,10 @@ public class Manufacturer implements OrderManufacturerService {
     private String name;
     private String adress;
     private int nip;
-    ProductOrdered productOrdered;
-    OrderInformationService orderInformationService;
+    protected ProductOrdered productOrdered;
+    protected OrderInformationService orderInformationService;
 
-    protected Manufacturer(final String name,final String adress,final int nip) {
+    public Manufacturer(final String name,final String adress,final int nip) {
         this.name = name;
         this.adress = adress;
         this.nip = nip;
@@ -27,7 +27,10 @@ public class Manufacturer implements OrderManufacturerService {
 
     @Override
     public boolean process() {
-
+        if (productOrdered.getManufacturer().equals(getName())) {
+            orderInformationService.orderInformationSentToManufacturer();
+            return true;
+            }
         return false;
     }
 }
