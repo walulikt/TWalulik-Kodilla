@@ -7,7 +7,7 @@ public class AirlineApplication {
         FlightRegister flightRegister=new FlightRegister();
         flightRegister.addFlight();
 
-        FlightSearcher flightSearcher=new FlightSearcher("Warszawa", "Gdańsk", "Wrocław", LocalDate.of(2017,12,31));
+        FlightSearcher flightSearcher=new FlightSearcher("Warszawa",  LocalDate.of(2017,12,31));
 
         flightSearcher.flightsToFrom(flightRegister);
         flightSearcher.flightsToFromThrough(flightRegister);

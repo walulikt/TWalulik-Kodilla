@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class RandomProductOrderSpecyfikation implements OrderSpecyfication {
 
     @Override
-    public boolean createSpecyfikation(User buyer, User seller, LocalDateTime timeOfOrder) {
+    public boolean createSpecyfikation(Order order) {
         return false;
     }
 }
