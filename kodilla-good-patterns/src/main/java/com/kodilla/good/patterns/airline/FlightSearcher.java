@@ -55,7 +55,7 @@ public class FlightSearcher {
                 .forEach(System.out::println);
     }
 
-    public void flightsToFromThrough (FlightRegister flightRegister) {
+        public void flightsToFromThrough (FlightRegister flightRegister) {
             System.out.println('\n' + "Lista lotów pośrednich z " + getCityOfDeparture() + " do " + getCityOfArrival()
                     + " przez " + getCityInterChange() + " na dzień: " + getFlightDate() + ";");
             List<Flight> fromAToB = flightRegister.flightList.stream()
