@@ -16,17 +16,17 @@ public class Calculator {
         return addResult;
     }
     public double sub(double a, double b) {
-        double subResult = a+b;
+        double subResult = a-b;
         System.out.println ("Równanie: " + a + " - "+ b + " daje " + display.displayValue(subResult));
         return subResult;
     }
     public double mul(double a, double b) {
-        double mulResult = a+b;
+        double mulResult = a*b;
         System.out.println ("Równanie: " + a + " * "+ b + " daje " + display.displayValue(mulResult));
         return mulResult;
     }
     public double div(double a, double b) {
-        double divResult = a+b;
+        double divResult = a/b;
         System.out.println ("Równanie: " + a + " / "+ b + " daje " + display.displayValue(divResult));
         return divResult;
     }
