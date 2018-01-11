@@ -2,7 +2,7 @@ package com.kodilla.patterns.strategy.social;
 
 public class User {
     private String userName;
-    SocialPublisher socialPublisher;
+    private SocialPublisher socialPublisher;
 
     public User(String userName) {
         this.userName = userName;
@@ -17,5 +17,9 @@ public class User {
 
     public void setSocialPublisher(SocialPublisher socialPublisher) {
         this.socialPublisher = socialPublisher;
+    }
+
+    public SocialPublisher getSocialPublisher() {
+        return socialPublisher;
     }
 }
