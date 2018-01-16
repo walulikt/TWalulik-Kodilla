@@ -1,44 +1,39 @@
 package com.kodilla.rps;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class RpsGame {
 
-    private String rock ="1";
-    private String paper ="2";
-    private String scissors ="3";
-    private int round;
-    private int roundCounter;
-    private int userWinCounter;
-    private int compWinCounter;
+    private final static String ROCK ="1";
+    private final static String PAPER ="2";
+    private final static String SCISSORS ="3";
+    private RpsRound rpsRound;
+    private User user;
 
-    public String getRock() {
-        return rock;
+    public RpsGame() {
+        this.user = new User();
+        this.rpsRound = new RpsRound();
     }
 
-    public String getPaper() {
-        return paper;
+    public static String getRock() {
+        return ROCK;
     }
 
-    public String getScissors() {
-        return scissors;
+    public static String getPaper() {
+        return PAPER;
     }
 
-    Scanner scanner = new Scanner(System.in);
-    User user =new User();
-    RpsRound rpsRound=new RpsRound();
-
-
-    public String userAction (){
-        String action=scanner.next();
-        scanner.nextLine();
-        return action;
-
+    public static String getScissors() {
+        return SCISSORS;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    static Scanner scanner = new Scanner(System.in);
 
     public void greetingRpsMethod() {
-
         System.out.println("Podaj swoje imię: ");
         String scannedName = scanner.next();
         scanner.nextLine();
@@ -47,99 +42,44 @@ public class RpsGame {
         System.out.println("Podaj ilość rund: ");
         int roundsNumber = scanner.nextInt();
         scanner.nextLine();
-        setRound(roundsNumber);
-        System.out.println(toString());
-
+        rpsRound.setRound(roundsNumber);
     }
 
     @Override
     public String toString() {
         return "W grze RPS dostępne są następujące opcje: \n"+
-                "Klawisz: " + rock + " - zagranie: 'kamień' \n" +
-                "Klawisz: " + paper + " - zagranie: 'papier' \n" +
-                "Klawisz: " + scissors + " - zagranie: 'nożyczki' \n" +
+                "Klawisz: " + ROCK + " - zagranie: 'kamień' \n" +
+                "Klawisz: " + PAPER + " - zagranie: 'papier' \n" +
+                "Klawisz: " + SCISSORS + " - zagranie: 'nożyczki' \n" +
                 "Klawisz: x - zakończenie gry \n" +
                 "Klawisz: n - nowa gra \n";
     }
 
     public void printRoundResult(){
-        System.out.println("Wynik po rundzie: " + getRoundCounter() + '/' + getRound() + " = " + user.getUserName() + " " + getUserWinCounter()
-                + ", Komputer " + getCompWinCounter());
+        System.out.println("Wynik po rundzie " + rpsRound.getRoundCounter() + ": " + user.getUserName() + " " +rpsRound.getUserWinCounter()
+                + ", Komputer " + rpsRound.getCompWinCounter());
     }
 
-
-    public int getRound() {
-        return round;
-    }
-
-    public void setRound(int round) {
-        this.round = round;
-    }
-
-    public int getRoundCounter() {
-        return roundCounter;
-    }
-
-    public void setRoundCounter(int roundCounter) {
-        this.roundCounter = roundCounter;
-    }
-
-    public int getUserWinCounter() {
-        return userWinCounter;
-    }
-
-    public void setUserWinCounter(int userWinCounter) {
-        this.userWinCounter = userWinCounter;
-    }
-
-    public int getCompWinCounter() {
-        return compWinCounter;
-    }
-
-    public void setCompWinCounter(int compWinCounter) {
-        this.compWinCounter = compWinCounter;
-    }
-
-    public void roundLoop() {
-        Random rnd = new Random();
-        int compShape = rnd.nextInt(3) + 1;
-        int win=0;
-        int theRound=0;//wykasować
-        if ((userAction().equals(getRock())) && (compShape == 1)) {
-            System.out.println("REMIS: " +user.getUserName() + ": 'kamień', Komputer: 'kamień'.");
-            setRoundCounter(++theRound);
-
-        } else if ((userAction().equals(getPaper())) && (compShape == 2)) {
-            System.out.println("REMIS: " +user.getUserName() + ": 'papier', Komputer: 'papier'.");
-            setRoundCounter(++theRound);
-        } else if ((userAction().equals(getScissors())) && (compShape == 3)) {
-            System.out.println("REMIS: " +user.getUserName() + ": 'nożyce', Komputer: 'nożyce'.");
-            setRoundCounter(++theRound);
-        } else if ((userAction().equals(getRock())) && (compShape == 2)) {
-            System.out.println("Komputer wygrywa: " +user.getUserName() + ": 'kamień', Komputer: 'papier'.");
-            setRoundCounter(++theRound);
-            setCompWinCounter(compWinCounter++);
-        } else if ((userAction().equals(getRock())) && (compShape == 3)) {
-            System.out.println(user.getUserName() + " wygrywa: " +user.getUserName() + ": 'kamień', Komputer: 'nożyce'.");
-            setRoundCounter(++theRound);
-            setUserWinCounter(++win+getUserWinCounter());
-        } else if ((userAction().equals(getPaper())) && (compShape == 1)) {
-            System.out.println(user.getUserName() + " wygrywa: " +user.getUserName() + ": 'papier', Komputer: 'kamień'.");
-            setRoundCounter(++theRound);
-            setUserWinCounter(userWinCounter++);
-        } else if ((userAction().equals(getPaper())) && (compShape == 3)) {
-            System.out.println("Komputer wygrywa: " +user.getUserName() + ": 'papier', Komputer: 'nożyce'.");
-            setRoundCounter(++theRound);
-            setCompWinCounter(compWinCounter++);
-        } else if ((userAction().equals(getScissors())) && (compShape == 1)) {
-            System.out.println("Komputer wygrywa: " +user.getUserName() + ": 'nożyce', Komputer: 'kamień'.");
-            setRoundCounter(++theRound);
-            setCompWinCounter(compWinCounter++);
-        } else if ((userAction().equals(getScissors())) && (compShape == 2)) {
-            System.out.println(user.getUserName() + " wygrywa: " +user.getUserName() + ": 'nożyce', Komputer: 'papier'.");
-            setRoundCounter(++theRound);
-            setUserWinCounter(userWinCounter++);
+    public void theGame (){
+        while ((rpsRound.getUserWinCounter()<=rpsRound.getRound())||(rpsRound.getCompWinCounter()<=rpsRound.getRound()) ) {
+            System.out.print("Wykonaj swój ruch:");
+            rpsRound.roundLoop(user);
+            printRoundResult();
+            if (rpsRound.getUserWinCounter()==rpsRound.getRound()){
+                System.out.println ("****** Tą rozgrywkę wygrał " + user.getUserName()+ " z wynikiem: " + rpsRound.getUserWinCounter() +" do " +rpsRound.getCompWinCounter() +" ******");
+                System.out.println(toString());
+                rpsRound.setUserWinCounter(0);
+                rpsRound.setCompWinCounter(0);
+                rpsRound.setRoundCounter(0);
+                break;
+            } else if (rpsRound.getCompWinCounter()==rpsRound.getRound()) {
+                System.out.println("****** Tą rozgrywkę wygrał KOMPUTER z wynikiem: " + rpsRound.getUserWinCounter() + " do " + rpsRound.getCompWinCounter() + " ******");
+                System.out.println(toString());
+                rpsRound.setUserWinCounter(0);
+                rpsRound.setCompWinCounter(0);
+                rpsRound.setRoundCounter(0);
+                break;
+            }
         }
-
     }
 }

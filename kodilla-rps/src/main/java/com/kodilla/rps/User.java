@@ -1,15 +1,9 @@
 package com.kodilla.rps;
 
-import java.util.Scanner;
-
 public class User {
 
     private String userName;
 
-   /* public User(String userName) {
-        this.userName = userName;
-    }
-*/
     public String getUserName() {
         return userName;
     }
@@ -18,5 +12,9 @@ public class User {
         this.userName = userName;
     }
 
+    public String userAction (String userAction){
+        String action=userAction;
+        return action;
 
+    }
 }
