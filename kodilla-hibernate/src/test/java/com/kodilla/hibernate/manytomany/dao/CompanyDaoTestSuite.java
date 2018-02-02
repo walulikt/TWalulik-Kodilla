@@ -15,7 +15,7 @@ public class CompanyDaoTestSuite {
     @Autowired
     CompanyDao companyDao;
 
-    @Test
+    /*@Test
     public void  testSaveManyToMany(){
         //Given
         Employee johnSmith = new Employee("John", "Smith");
@@ -59,5 +59,5 @@ public class CompanyDaoTestSuite {
             } catch (Exception e) {
                 //do nothing
             }
-        }
+        }*/
 }
