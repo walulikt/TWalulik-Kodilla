@@ -5,6 +5,13 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedNativeQuery(
+        name = "Company.retrieveCompanyByThreeChar",
+        query = "SELECT * FROM COMAPNIES "+
+                "WHERE SUBSTR(COMPANY_NAME FROM 1 FOR 3) LIKE :THIS_COMPANY_NAME",
+        resultClass = Company.class
+)
+
 @Entity
 @Table(name = "COMAPNIES")
 public class Company {
