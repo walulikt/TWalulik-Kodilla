@@ -41,4 +41,14 @@ public class SudokuElement {
             return "| "+value+" | " ;
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SudokuElement that = (SudokuElement) o;
+
+        return getValue() == that.getValue();
+    }
 }

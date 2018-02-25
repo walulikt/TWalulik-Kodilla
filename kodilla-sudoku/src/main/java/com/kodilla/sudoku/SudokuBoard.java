@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SudokuBoard {
     private SudokuRow sudokuRow;
-    private List<SudokuRow> board = new ArrayList<>();
+    private List<SudokuRow> board = new ArrayList<>(9);
 
     public SudokuRow getSudokuRow() {
         return sudokuRow;
@@ -30,5 +30,21 @@ public class SudokuBoard {
             stringOfElements += board.get(i).toString();
         }
         return stringOfElements;
+    }
+    public SudokuBoard shallowCopy() throws CloneNotSupportedException {
+        return (SudokuBoard)super.clone();
+    }
+
+    public SudokuBoard deepCopy() throws CloneNotSupportedException {
+        SudokuBoard clonedBoard = (SudokuBoard)super.clone();
+        clonedBoard.setBoard(new ArrayList<>());
+        for (SudokuRow theRow: clonedBoard.getBoard()) {
+            SudokuRow clonedRow = new SudokuRow();
+            for (SudokuElement element : theRow.getRow()){
+                clonedRow.getRow().add(element);
+            }
+            clonedBoard.getBoard().add(clonedRow);
+        }
+        return clonedBoard;
     }
 }
