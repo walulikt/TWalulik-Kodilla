@@ -9,6 +9,7 @@ public class SudokuGame {
             "W celu zakończenia gry wpisz 'EXIT'"+'\n'+"Zaczynamy!";
     public static final String SET_INPUT_INFORMATION="Wybierz nr kolumny, nr wiersz i wartosc pola, albo napis SUDOKU aby rozwiązać";
     private SudokuBoard sB;
+    private ElementValidator elementValidator =new ElementValidator(sB);
     private int columnNumber;
     private int rowNumber;
     private int elementValue;
@@ -36,36 +37,13 @@ public class SudokuGame {
         rowNumber= Integer.parseInt(elementData[1])-1;
         elementValue = Integer.parseInt(elementData[2]);
 
-        for (int rowIndex=0 ; rowIndex<sB.getBoard().size(); rowIndex++)
-            if (sB.getBoard().get(rowIndex).getRow().get(columnNumber).equals(sB.getBoard().get(rowNumber).getRow().get(elementValue))){ //sprawdzanie w każdym wierszu dla danego indeksu
-                System.out.println("Niedozwolona wartość (" + elementValue + ") dla pozycji kolumna: " + columnNumber + ", wiersz: " + rowNumber + '\n'
-                        + "Taka wartość występuje już w tej kolumnie. Wprowadź dane jeszcze raz!");
-            } else if ((rowIndex==rowNumber)&&(sB.getBoard().get(rowIndex).getRow().contains(sB.getBoard().get(rowIndex).getRow().get(elementValue)))) { //sprawdzanie w danym wierszu dla danego indeksu
-                System.out.println("Niedozwolona wartość (" + elementValue + ") dla pozycji kolumna: " + columnNumber + ", wiersz: " + rowNumber + '\n'
-                        + "Taka wartość występuje już w tym wierszu. Wprowadź dane jeszcze raz!");
-            } else if ((rowIndex==rowNumber)&&(columnNumber==0||columnNumber%3==0)&&(rowNumber==0||rowNumber%3==0)) { //dla pozycji 00 i odpowiednika
-                for (int i=columnNumber+1; i<columnNumber+3;i++){
-                    if (sB.getBoard().get(rowIndex+1).getRow().get(i).equals(sB.getBoard().get(rowNumber).getRow().get(elementValue))){}
-                    if (sB.getBoard().get(rowIndex+2).getRow().get(i).equals(sB.getBoard().get(rowNumber).getRow().get(elementValue))){}
-
-            }
-                /*List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-
-                int skip = 3;
-                int size = list.size();
-                // Limit to carefully avoid IndexOutOfBoundsException
-                int limit = size / skip + Math.min(size % skip, 1);
-
-                List<Integer> result = Stream.iterate(list, l -> l.subList(skip, l.size()))
-                        .limit(limit)
-                        .map(l -> l.get(0))
-                        .collect(Collectors.toList());
-
-                System.out.println(result); // [1, 4, 7, 10]*/
-            } else {
-                sB.getBoard().get(rowNumber).getRow().get(columnNumber).setValue(elementValue);
-                System.out.println ("Dane wprowadzono");
-            }
+        if((elementValidator.columnElementValidator(columnNumber,rowNumber,elementValue))&&(elementValidator.rowElementValidator(columnNumber,rowNumber,elementValue))&&
+        (elementValidator.positionEValidator(columnNumber,rowNumber, elementValue))){
+            sB.getBoard().get(rowNumber).getRow().get(columnNumber).setValue(elementValue);
+            System.out.println ("Dane wprowadzono");
+        } else {
+            System.out.println("Nie można wprowadzić takiej wartości w tym polu");
+        }
     }
 
     public void printSudokuBoard (){
@@ -74,6 +52,9 @@ public class SudokuGame {
     }
 
     public boolean resolveSudoku() {
+        /*Tworzę klona utworzonej tablicy i sprawdzam każde pole po kolei poprzez iterowanie po wszystkich elementach każdego wiersza. Jeśli .get(dane pole) jest różne od (-1)
+        to pętla sprawdzająca czy liczby 1-9 spełniają warunki ElementValidator. Jeśli tak to od razu wstawiamy w klonie*/
+
         String scanner = "pytanie o to czy gramy kolejny raz czy kończymy";
         return true;
     }

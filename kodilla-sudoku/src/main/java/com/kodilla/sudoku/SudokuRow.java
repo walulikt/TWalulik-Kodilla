@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SudokuRow {
     private SudokuElement sudokuElement;
-    private List<SudokuElement> row = new ArrayList<>(9); //po trzy Elementy w Liście
+    private List<SudokuElement> row = new ArrayList<>(9);
 
     public SudokuElement getSudokuElement() {
         return sudokuElement;

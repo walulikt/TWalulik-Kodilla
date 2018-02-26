@@ -2,9 +2,7 @@ package com.kodilla.sudoku;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
-import java.util.Iterator;
 
 public class SudokuTestSuite {
 
@@ -42,26 +40,6 @@ public class SudokuTestSuite {
 
         //Then
         System.out.print(sudokuElement.getElementValues());
-
-    }
-    @Test
-    public void testSudokuElementEquals(){
-        //Given
-        SudokuGame sudokuGame = new SudokuGame();
-        sudokuGame.createBoard();
-        SudokuBoard sudokuBoard = sudokuGame.getsB();
-
-        //When
-        sudokuGame.setTheElement("1,2,5");
-
-        boolean checkEquals1 = sudokuGame.checkSudokuElementEquals(1);
-       // sudokuGame.setTheElement("2,2,4");
-      //  boolean checkEquals2 = sudokuGame.checkSudokuElementEquals(4);
-
-        //Then
-        Assert.assertFalse(checkEquals1);
-      //  Assert.assertTrue(checkEquals2);
-        sudokuGame.printSudokuBoard();
 
     }
 
