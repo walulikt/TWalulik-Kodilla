@@ -11,7 +11,7 @@ public class SudokuRunner {
         System.out.println(SudokuGame.MENU);
 
         while (!gameFinished){
-            theGame.createBoard();
+            theGame.printSudokuBoard();
             System.out.println (SudokuGame.SET_INPUT_INFORMATION);
             String userInput = scanner.nextLine();
             if (userInput.equals("SUDOKU")){

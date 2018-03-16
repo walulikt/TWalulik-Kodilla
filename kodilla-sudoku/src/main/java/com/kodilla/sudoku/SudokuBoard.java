@@ -7,6 +7,17 @@ public class SudokuBoard {
     private SudokuRow sudokuRow;
     private List<SudokuRow> board = new ArrayList<>(9);
 
+    public SudokuBoard() {
+        for (int b=0; b<9; b++) {
+            getBoard().add(new SudokuRow());
+        }
+        for (SudokuRow row: getBoard()) {
+            for (int b=0; b<9; b++) {
+                getBoard().get(b).getRow().add(new SudokuElement());
+            }
+        }
+    }
+
     public SudokuRow getSudokuRow() {
         return sudokuRow;
     }
@@ -22,6 +33,7 @@ public class SudokuBoard {
     public void setBoard(List<SudokuRow> board) {
         this.board = board;
     }
+
 
     @Override
     public String toString () {

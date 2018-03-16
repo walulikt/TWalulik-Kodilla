@@ -1,146 +1,127 @@
 package com.kodilla.sudoku;
 
+import java.util.stream.Collectors;
+
 public class ElementValidator {
 
     private SudokuBoard sudokuBoard;
 
     public ElementValidator(SudokuBoard sudokuBoard) {
-        this.sudokuBoard = sudokuBoard;
+        this.sudokuBoard=sudokuBoard;
     }
 
-    public boolean rowElementValidator(int columnNumber, int rowNumber, int elementValue){
-        boolean elementValueChecked=false;
-        for (int rowIndex=0 ; rowIndex<sudokuBoard.getBoard().size(); rowIndex++)
-            if (sudokuBoard.getBoard().get(rowIndex).getRow().get(columnNumber).getValue()==elementValue) { //sprawdzanie w każdym wierszu dla danej wartości
-                System.out.println("Niedozwolona wartość (" + elementValue + ") dla pozycji kolumna: " + (columnNumber+1) + ", wiersz: " + (rowNumber+1) + '\n'
-                        + "Taka wartość występuje już w tej kolumnie. Wprowadź dane jeszcze raz!");
-                elementValueChecked = false;
-                break;
-            } else {
-            elementValueChecked=true;
-            }
-        return elementValueChecked;
+    public SudokuBoard getSudokuBoard() {
+        return sudokuBoard;
     }
 
     public boolean columnElementValidator(int columnNumber, int rowNumber, int elementValue){
         boolean elementValueChecked=false;
-        for (int i=0;i<sudokuBoard.getBoard().size();i++){
-            if (sudokuBoard.getBoard().get(rowNumber).getRow().get(i).getValue()==elementValue){        //sprawdzanie w danym wierszu dla danej wartości
+        for (int rowIndex=0 ; rowIndex<9; rowIndex++)
+            if (sudokuBoard.getBoard().get(rowIndex).getRow().get(columnNumber).getValue()==elementValue) {
                 System.out.println("Niedozwolona wartość (" + elementValue + ") dla pozycji kolumna: " + (columnNumber+1) + ", wiersz: " + (rowNumber+1) + '\n'
-                        + "Taka wartość występuje już w tym wierszu. Wprowadź dane jeszcze raz!");
-                elementValueChecked = false;
+                        + "Taka wartość występuje już w tej kolumnie. Wprowadź dane jeszcze raz!");
+                elementValueChecked=false;
                 break;
-            } else {
-                elementValueChecked=true; }
-        }
+            } else { elementValueChecked=true; }
         return elementValueChecked;
     }
 
-    public boolean positionEValidator(int columnNumber, int rowNumber, int elementValue){
-        boolean elementValueChecked=false;
-        int horizontalSquerNr = columnNumber/3;
-        int verticalSquerNr = rowNumber/3;
-        if((sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+0))==0) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+0))==3) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+0))==6) &&
-                        (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+0))==0)||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+0))==3) ||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+0))==6)){
-            for (int r = rowNumber+1; r<(rowNumber+3); r++){
-                if (sudokuBoard.getBoard().get(r).getRow().get(columnNumber+1).getValue()==elementValue){
-                    elementValueChecked = false;
-                    break;
-                }else if (sudokuBoard.getBoard().get(r).getRow().get(columnNumber+2).getValue()==elementValue) {
-                    elementValueChecked = false;
-                    break;
-                }else {
-                    elementValueChecked=true;
-                }
-            }
-        } else if ((sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+1))==1) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+1))==4) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+1))==7) &&
-                        (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+1))==1)||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+1))==4) ||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+1))==7) ) {
-            for(int r = rowNumber-1; r<(rowNumber+2); r+=2) {
-                if (sudokuBoard.getBoard().get(r).getRow().get(columnNumber-1).getValue()==elementValue){
-                    elementValueChecked = false;
-                    break;
-                }else if (sudokuBoard.getBoard().get(r).getRow().get(columnNumber+1).getValue()==elementValue) {
-                    elementValueChecked = false;
-                    break;
-                }else {
-                    elementValueChecked=true;
-                }
-            }
-        } else if ((sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+2))==2) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+2))==5) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+2))==8) &&
-                        (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+2))==2)||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+2))==5) ||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+2))==8)) {
-            for(int r = rowNumber-2; r<rowNumber; r++) {
-                if (sudokuBoard.getBoard().get(r).getRow().get(columnNumber-2).getValue()==elementValue){
-                    elementValueChecked = false;
-                    break;
-                }else if (sudokuBoard.getBoard().get(r).getRow().get(columnNumber-1).getValue()==elementValue) {
-                    elementValueChecked = false;
-                    break;
-                }else {
-                    elementValueChecked=true;
-                }
-            }
-        } else if((sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+0))==0) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+0))==3) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+0))==6) &&
-                        (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+1))==1)||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+1))==4) ||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+1))==7) ){
-            //sprawdzenie wartości (contains) dla danej wartości elementu w porównaniu do wierszów o indeksie +1 i -1 oraz indeksach elementów  +1 i +2 od danego
+    public boolean rowElementValidator(int columnNumber, int rowNumber, int elementValue){
+        boolean elementValueChecked= false;
+        SudokuRow sudokuRow = sudokuBoard.getBoard().get(rowNumber);
+        if(sudokuRow.getRow().stream().map(sE->sE.getValue()).collect(Collectors.toList()).contains(elementValue)){
+            System.out.println("Niedozwolona wartość (" + elementValue + ") dla pozycji kolumna: " + (columnNumber+1) + ", wiersz: " + (rowNumber+1) + '\n'
+                    + "Taka wartość występuje już w tym wierszu. Wprowadź dane jeszcze raz!");
             elementValueChecked=false;
-        } else if ((sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+0))==0) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+0))==3) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+0))==6) &&
-                        (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+2))==2)||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+2))==5) ||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+2))==8)){
-            //sprawdzenie wartości (contains) dla danej wartości elementu w porównaniu do wierszów o indeksie -1 i -2 oraz indeksach elementów  +1 i +2 od danego
-            elementValueChecked=false;
-        } else if ((sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+1))==1) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+1))==4) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+1))==7) &&
-                        (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+0))==0)||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+0))==3) ||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+0))==6)) {
-            //sprawdzenie wartości (contains) dla danej wartości elementu w porównaniu do wierszów o indeksie +1 i +2 oraz indeksach elementów  -1 i +1 od danego
-            elementValueChecked=false;
-        } else if ((sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+1))==1) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+1))==4) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+1))==7) &&
-                        (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+2))==2)||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+2))==5) ||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+2))==8)){
-            //sprawdzenie wartości (contains) dla danej wartości elementu w porównaniu do wierszów o indeksie +1 i -1 oraz indeksach elementów  -1 i +1 od danego
-            elementValueChecked=false;
-        } else if ((sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+2))==2) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+2))==5) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+2))==8) &&
-                        (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+0))==0)||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+0))==3) ||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+0))==6)){
-            //sprawdzenie wartości (contains) dla danej wartości elementu w porównaniu do wierszów o indeksie +1 i +2 oraz indeksach elementów  -1 i -2 od danego
-            elementValueChecked=false;
-        } else if ((sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+2))==2) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+2))==5) ||
-                (sudokuBoard.getBoard().get(rowNumber).getRow().indexOf(sudokuBoard.getBoard().get(rowNumber).getRow().get(horizontalSquerNr*3+2))==8) &&
-                        (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+1))==1)||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+1))==4) ||
-                (sudokuBoard.getBoard().indexOf(sudokuBoard.getBoard().get(verticalSquerNr*3+1))==7)) {
-            //sprawdzenie wartości (contains) dla danej wartości elementu w porównaniu do wierszów o indeksie +1 i -1 oraz indeksach elementów  -1 i -2 od danego
-            elementValueChecked=false;
-        }
-     return elementValueChecked;
+        } else { elementValueChecked=true; }
+        return elementValueChecked;
     }
 
+    public boolean checkColumnsInSquere(int rowToCheck, int columnToCheck, int elemntValue){
+        boolean valueChecked;
+        if (sudokuBoard.getBoard().get(rowToCheck).getRow().get(columnToCheck).getValue()==elemntValue){
+            return valueChecked=true;
+        } else {
+            return valueChecked = false;
+        }
+    }
+
+    public boolean positionEValidator(int columnNrOfTheElement, int rowNrOfTheElement, int elementValue){
+        boolean elementValueChecked=true;
+
+        if ((columnNrOfTheElement==0 || columnNrOfTheElement==3 || columnNrOfTheElement==6) &&
+                (rowNrOfTheElement==0||rowNrOfTheElement==3 ||rowNrOfTheElement==6)){
+            for (int r = rowNrOfTheElement+1; r<(rowNrOfTheElement+3); r++){
+                if (checkColumnsInSquere(r,(columnNrOfTheElement+1),elementValue)||
+                        checkColumnsInSquere(r,(columnNrOfTheElement+2),elementValue)){
+                    return elementValueChecked = false;
+                }
+            }
+        } else if ((columnNrOfTheElement==1 || columnNrOfTheElement==4 || columnNrOfTheElement==7) &&
+                (rowNrOfTheElement==1|| rowNrOfTheElement==4 || rowNrOfTheElement==7)){
+            for(int r = rowNrOfTheElement-1; r<(rowNrOfTheElement+2); r+=2) {
+                if (checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)||
+                        checkColumnsInSquere(r,columnNrOfTheElement+1,elementValue)){
+                    return elementValueChecked = false;
+                }
+            }
+        } else if ((columnNrOfTheElement==2 ||columnNrOfTheElement==5 ||columnNrOfTheElement==8) &&
+                (rowNrOfTheElement==2||rowNrOfTheElement==5 ||rowNrOfTheElement==8)){
+            for(int r = rowNrOfTheElement-2; r<rowNrOfTheElement; r++) {
+                if (checkColumnsInSquere(r,columnNrOfTheElement-2,elementValue)||
+                        checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)){
+                    return elementValueChecked = false;
+                }
+            }
+        } else if((columnNrOfTheElement==0 ||columnNrOfTheElement==3 ||columnNrOfTheElement==6 &&
+                rowNrOfTheElement==1||rowNrOfTheElement==4 ||rowNrOfTheElement==7)) {
+            for(int r = rowNrOfTheElement-1; r<rowNrOfTheElement+2; r+=2) {
+                if (checkColumnsInSquere(r,columnNrOfTheElement+1,elementValue)||
+                        checkColumnsInSquere(r,columnNrOfTheElement+2,elementValue)){
+                    return elementValueChecked = false;
+                }
+            }
+        } else if ((columnNrOfTheElement==0 ||columnNrOfTheElement==3 ||columnNrOfTheElement==6) &&
+                (rowNrOfTheElement==2||rowNrOfTheElement==5 ||rowNrOfTheElement==8)){
+            for(int r = rowNrOfTheElement-2; r<rowNrOfTheElement; r++) {
+                if (checkColumnsInSquere(r,columnNrOfTheElement+1,elementValue)||
+                        checkColumnsInSquere(r,columnNrOfTheElement+2,elementValue)){
+                    return elementValueChecked = false;
+                }
+            }
+        } else if ((columnNrOfTheElement==1 ||columnNrOfTheElement==4 ||columnNrOfTheElement==7) &&
+                (rowNrOfTheElement==0||rowNrOfTheElement==3 ||rowNrOfTheElement==6)) {
+            for(int r = rowNrOfTheElement+1; r<rowNrOfTheElement+3; r++) {
+                if (checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)||
+                        checkColumnsInSquere(r,columnNrOfTheElement+1,elementValue)){
+                    return elementValueChecked = false;
+                }
+            }
+        } else if ((columnNrOfTheElement==1 ||columnNrOfTheElement==4 ||columnNrOfTheElement==7) &&
+                (rowNrOfTheElement==2||rowNrOfTheElement==5 ||rowNrOfTheElement==8)){
+            for(int r = rowNrOfTheElement-2; r<rowNrOfTheElement; r++) {
+                if (checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)||
+                        checkColumnsInSquere(r,columnNrOfTheElement+1,elementValue)){
+                    return elementValueChecked = false;
+                }
+            }
+        } else if ((columnNrOfTheElement==2 || columnNrOfTheElement==5 ||columnNrOfTheElement==8) &&
+                (rowNrOfTheElement==0||rowNrOfTheElement==3 ||rowNrOfTheElement==6)){
+            for(int r = rowNrOfTheElement+1; r<rowNrOfTheElement+3; r++) {
+                if (checkColumnsInSquere(r,columnNrOfTheElement-2,elementValue)||
+                        checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)){
+                    return elementValueChecked = false;
+                }
+            }
+        } else if ((columnNrOfTheElement==2 ||columnNrOfTheElement==5 ||columnNrOfTheElement==8) &&
+                (rowNrOfTheElement==1||rowNrOfTheElement==4 ||rowNrOfTheElement==7)) {
+            for(int r = rowNrOfTheElement-1; r<rowNrOfTheElement+2; r+=2) {
+                if (checkColumnsInSquere(r,columnNrOfTheElement-2,elementValue) ||
+                checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)){
+                    return elementValueChecked = false;
+                }
+            }
+        }
+    return elementValueChecked;
+    }
 }

@@ -38,7 +38,7 @@ public class SudokuElement {
         if (value==EMPTY){
             return "| - |";
         } else {
-            return "| "+value+" | " ;
+            return "| "+value+" |" ;
         }
     }
 

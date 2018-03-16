@@ -8,26 +8,17 @@ public class SudokuGame {
             "Jak już wprowadzisz wszystkie liczby wpisz słowo 'SUDOKU' a program zajmie się resztą :)." + '\n' +
             "W celu zakończenia gry wpisz 'EXIT'"+'\n'+"Zaczynamy!";
     public static final String SET_INPUT_INFORMATION="Wybierz nr kolumny, nr wiersz i wartosc pola, albo napis SUDOKU aby rozwiązać";
-    private SudokuBoard sB;
-    private ElementValidator elementValidator =new ElementValidator(sB);
+    private SudokuBoard sB = new SudokuBoard();
+    private ElementValidator elementValidator=new ElementValidator(sB);
     private int columnNumber;
     private int rowNumber;
     private int elementValue;
 
-    public SudokuBoard getsB() {
-        return sB;
+    public ElementValidator getElementValidator() {
+        return elementValidator;
     }
 
-    public SudokuBoard createBoard(){
-        sB=new SudokuBoard();
-        for (int b=0; b<9; b++) {
-            sB.getBoard().add(new SudokuRow());
-        }
-        for (SudokuRow row: sB.getBoard()) {
-            for (int b=0; b<9; b++) {
-                sB.getBoard().get(b).getRow().add(new SudokuElement());
-            }
-        }
+    public SudokuBoard getsB() {
         return sB;
     }
 
@@ -37,12 +28,13 @@ public class SudokuGame {
         rowNumber= Integer.parseInt(elementData[1])-1;
         elementValue = Integer.parseInt(elementData[2]);
 
-        if((elementValidator.columnElementValidator(columnNumber,rowNumber,elementValue))&&(elementValidator.rowElementValidator(columnNumber,rowNumber,elementValue))&&
-        (elementValidator.positionEValidator(columnNumber,rowNumber, elementValue))){
+        if((elementValidator.columnElementValidator(columnNumber,rowNumber,elementValue))&&
+                (elementValidator.rowElementValidator(columnNumber,rowNumber,elementValue))&&
+                (elementValidator.positionEValidator(columnNumber,rowNumber, elementValue))){
             sB.getBoard().get(rowNumber).getRow().get(columnNumber).setValue(elementValue);
             System.out.println ("Dane wprowadzono");
         } else {
-            System.out.println("Nie można wprowadzić takiej wartości w tym polu");
+            System.out.println("Nie można wprowadzić wartości: " + (elementValue)+ " w polu: kolumna: "+(columnNumber+1)+", wiersz: "+(rowNumber+1));
         }
     }
 
