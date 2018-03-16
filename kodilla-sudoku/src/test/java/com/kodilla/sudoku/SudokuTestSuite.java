@@ -42,5 +42,28 @@ public class SudokuTestSuite {
         System.out.print(sudokuElement.getElementValues());
 
     }
+    @Test
+    public void testSudokuElementsSetValuesValidator(){
+        //Given
+        SudokuGame sudokuGame = new SudokuGame();
+        ElementValidator eV = new ElementValidator(sudokuGame.getsB());
+
+        //When
+        sudokuGame.setTheElement("2,3,4");
+        sudokuGame.printSudokuBoard();
+
+       sudokuGame.setTheElement("1,1,4");
+
+        sudokuGame.setTheElement("3,2,4");
+        sudokuGame.setTheElement("1,4,4");
+        sudokuGame.setTheElement("8,8,4");
+        sudokuGame.setTheElement("7,9,4");
+        sudokuGame.printSudokuBoard();
+
+        //Then
+
+
+    }
+
 
 }
