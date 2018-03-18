@@ -18,6 +18,8 @@ import java.math.BigDecimal;
 public class ShopServiceTestSuite {
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private OrderFacade orderFacade;
 
     @Test
     public void testShopServiceSubmitOrder() {
@@ -65,7 +67,7 @@ public class ShopServiceTestSuite {
 
     @Test
     public void testShopFacade(){
-        OrderFacade orderFacade = new OrderFacade();
+      //  OrderFacade orderFacade = new OrderFacade();
         OrderDto order = new OrderDto();
         order.addItem(new ItemDto(10L,2));
         order.addItem(new ItemDto(216L,1));

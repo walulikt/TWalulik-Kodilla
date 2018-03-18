@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NamedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface CompanyDao extends CrudRepository<Company, Integer> {
     @Query(nativeQuery = true)
     List<Company> retrieveCompanyByThreeChar (@Param("THIS_COMPANY_NAME") String threeChar);
 
+    @Query()
+    List<Company> searcheCompanyByTekstElement (@Param("KEY_TEKST") String keyTekst);
 }
