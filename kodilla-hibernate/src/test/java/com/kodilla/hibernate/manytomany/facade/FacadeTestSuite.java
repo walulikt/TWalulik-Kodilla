@@ -28,14 +28,12 @@ public class FacadeTestSuite {
     public void companySearchTest(){
         //Given
         Company testCompany= new Company("This test comp");
-
         //When
         companyDao.save(testCompany);
-
         //Then
         Assert.assertEquals(1,searchingFacade.companySearch("test").size());
-
         //CleanUp
+        employeeDao.deleteAll();
         companyDao.deleteAll();
     }
 
@@ -43,13 +41,10 @@ public class FacadeTestSuite {
     public void employeeSearchTest(){
         //Given
         Employee testEmp= new Employee("FirstName", "TestLastName");
-
         //When
         employeeDao.save(testEmp);
-
         //Then
         Assert.assertEquals(1,searchingFacade.employeeSearch("Test").size());
-
         //CleanUp
         employeeDao.deleteAll();
     }
