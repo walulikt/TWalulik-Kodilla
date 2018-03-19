@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,7 +21,7 @@ public class SearchingFacade {
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchingFacade.class);
 
     public List<Company> companySearch (String partOfTheCompaniesName) {
-        List<Company> companiesFound = companyDao.searcheCompanyByTekstElement(partOfTheCompaniesName);
+        List<Company> companiesFound = companyDao.searchCompanyByElement(partOfTheCompaniesName);
         LOGGER.info("Start searching companies with '" + partOfTheCompaniesName+ "' in their name.");
        try{
            if (companiesFound.size()==0){
@@ -35,7 +34,7 @@ public class SearchingFacade {
     }
 
     public List<Employee> employeeSearch (String partOfTheEmployeesName) {
-        List<Employee> employeesFound = employeeDao.searchEpmployeeByTekstElement(partOfTheEmployeesName);
+        List<Employee> employeesFound = employeeDao.searchEmployeeByElement(partOfTheEmployeesName);
         LOGGER.info("Start searching employees with '" + partOfTheEmployeesName+ "' in their name.");
         try{
             if (employeesFound.size()==0){

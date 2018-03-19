@@ -9,7 +9,7 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(
                 name = "Employee.searchEmployeeByElement",
-                query = "FROM Employee WHERE lastname LIKE :%KEY_TEKST%"
+                query = "FROM Employee WHERE lastname LIKE CONCAT(CONCAT('%', KEY_TEXT), '%')"
         ),
         @NamedQuery(
                 name = "Employee.retrieveEmployeeByName",
