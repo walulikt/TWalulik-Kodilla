@@ -93,7 +93,7 @@ public class CrudAppTestSuite    {
         Thread.sleep( 4000);
 
         result = driverTrello.findElements(By.xpath("//span")).stream()
-                .filter(theSpan -> theSpan.getText().contains("Test"))
+                .filter(theSpan -> theSpan.getText().contains(taskName))
                 .collect(Collectors.toList())
                 .size() > 0;
 
@@ -127,7 +127,7 @@ public class CrudAppTestSuite    {
     public void shouldCreateTrelloCard() throws InterruptedException{
         String taskName = createCrudAppTestTask();
         sendTestTaskToTrello(taskName);
-        assertTrue(checkTaskExistsInTrello("Test"));
+        assertTrue(checkTaskExistsInTrello(taskName));
         assertTrue(testCleaning(taskName));
     }
 }
