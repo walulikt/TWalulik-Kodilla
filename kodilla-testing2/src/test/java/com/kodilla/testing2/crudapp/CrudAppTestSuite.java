@@ -107,6 +107,7 @@ public class CrudAppTestSuite    {
 
         driver.switchTo().alert().accept();
 
+
         driver.findElements(By.xpath("//form[@class=\"datatable__row\"]")).stream()
                 .filter(anyForm ->
                         anyForm.findElement(By.xpath(".//p[@class=\"datatable__field-value\"]"))
