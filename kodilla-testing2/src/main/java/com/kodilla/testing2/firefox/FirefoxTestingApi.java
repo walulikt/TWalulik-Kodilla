@@ -41,5 +41,6 @@ public class FirefoxTestingApi {
         System.out.println("handle: " + handle);
         Thread.sleep(4000);
         driver.close();
+
     }
 }
