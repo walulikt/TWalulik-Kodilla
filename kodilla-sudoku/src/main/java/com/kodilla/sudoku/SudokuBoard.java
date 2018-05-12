@@ -3,7 +3,7 @@ package com.kodilla.sudoku;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SudokuBoard {
+public class SudokuBoard{
     private SudokuRow sudokuRow;
     private List<SudokuRow> board = new ArrayList<>(9);
 

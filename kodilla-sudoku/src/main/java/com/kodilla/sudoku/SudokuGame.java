@@ -10,32 +10,37 @@ public class SudokuGame {
     public static final String SET_INPUT_INFORMATION="Wybierz nr kolumny, nr wiersz i wartosc pola, albo napis SUDOKU aby rozwiązać";
     private SudokuBoard sB = new SudokuBoard();
     private ElementValidator elementValidator=new ElementValidator(sB);
-    private int columnNumber;
-    private int rowNumber;
+    private int columnIndex;
+    private int rowIndex;
     private int elementValue;
 
     public ElementValidator getElementValidator() {
         return elementValidator;
     }
 
-    public SudokuBoard getsB() {
+    public SudokuBoard getSB() {
         return sB;
     }
 
-    public void setTheElement(String userInput) throws NumberFormatException{
+    public boolean setTheElement(String userInput) throws NumberFormatException{
+        boolean isSet = true;
         String[] elementData = userInput.split(",");
-        columnNumber = Integer.parseInt(elementData[0])-1;
-        rowNumber= Integer.parseInt(elementData[1])-1;
+        columnIndex = Integer.parseInt(elementData[0])-1;
+        rowIndex = Integer.parseInt(elementData[1])-1;
         elementValue = Integer.parseInt(elementData[2]);
-
-        if((elementValidator.columnElementValidator(columnNumber,rowNumber,elementValue))&&
-                (elementValidator.rowElementValidator(columnNumber,rowNumber,elementValue))&&
-                (elementValidator.positionEValidator(columnNumber,rowNumber, elementValue))){
-            sB.getBoard().get(rowNumber).getRow().get(columnNumber).setValue(elementValue);
-            System.out.println ("Dane wprowadzono");
-        } else {
-            System.out.println("Nie można wprowadzić wartości: " + (elementValue)+ " w polu: kolumna: "+(columnNumber+1)+", wiersz: "+(rowNumber+1));
+        if(elementValidator.userInputCheck(columnIndex, rowIndex,elementValue)) {
+            if ((elementValidator.columnElementValidator(columnIndex, rowIndex, elementValue)) &&
+                    (elementValidator.rowElementValidator(columnIndex, rowIndex, elementValue)) &&
+                    (elementValidator.positionEValidator(columnIndex, rowIndex, elementValue))) {
+                sB.getBoard().get(rowIndex).getRow().get(columnIndex).setValue(elementValue);
+                System.out.println("Dane wprowadzono");
+                isSet=true;
+            } else {
+                System.out.println("Nie można wprowadzić wartości: " + (elementValue) + " w polu: kolumna: " + (columnIndex + 1) + ", wiersz: " + (rowIndex + 1));
+                isSet=false;
+            }
         }
+        return isSet;
     }
 
     public void printSudokuBoard (){
@@ -43,11 +48,25 @@ public class SudokuGame {
             System.out.println(r);
     }
 
-    public boolean resolveSudoku() {
-        /*Tworzę klona utworzonej tablicy i sprawdzam każde pole po kolei poprzez iterowanie po wszystkich elementach każdego wiersza. Jeśli .get(dane pole) jest różne od (-1)
-        to pętla sprawdzająca czy liczby 1-9 spełniają warunki ElementValidator. Jeśli tak to od razu wstawiamy w klonie*/
+    public boolean resolveSudoku(SudokuBoard sB) {
+        for (int row=1;row<10;row++){
+            for (int column=1; column<10; column++){
+                if(sB.getBoard().get(row-1).getRow().get(column-1).getValue()==0) {
+                    for (int e = 1; e < 10; e++) {
+                        String checkPositionValue = column+","+row+","+e;
 
-        String scanner = "pytanie o to czy gramy kolejny raz czy kończymy";
+                        if (setTheElement(checkPositionValue)&&
+                                resolveSudoku(sB)) {
+                            sB.getBoard().get(row-1).getRow().get(column-1).setValue(e);
+                            return true;
+                        }
+                        sB.getBoard().get(row-1).getRow().get(column-1).setValue(0);
+                     //   System.out.println("wartość "+ sB.getBoard().get(row).getRow().get(column)+" wyzerowana");
+                    }
+                    return false;
+                }
+            }
+        }
         return true;
     }
 }

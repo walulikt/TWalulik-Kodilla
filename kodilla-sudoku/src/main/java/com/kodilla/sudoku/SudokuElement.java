@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuElement {
-    public static int EMPTY = -1;
+    public static int EMPTY = 0;
     private int value = EMPTY;
     List<Integer> elementPossibleValues=new ArrayList<>(9);
 

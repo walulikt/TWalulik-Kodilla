@@ -1,6 +1,5 @@
 package com.kodilla.sudoku;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 
@@ -46,19 +45,26 @@ public class SudokuTestSuite {
     public void testSudokuElementsSetValuesValidator(){
         //Given
         SudokuGame sudokuGame = new SudokuGame();
-        ElementValidator eV = new ElementValidator(sudokuGame.getsB());
+        ElementValidator eV = new ElementValidator(sudokuGame.getSB());
 
         //When
-        sudokuGame.setTheElement("2,3,4");
+        sudokuGame.setTheElement("1,1,1");
+
+        sudokuGame.setTheElement("2,1,5");
+
+        sudokuGame.setTheElement("2,2,2");
+        sudokuGame.setTheElement("3,3,3");
+        sudokuGame.setTheElement("4,4,4");
+        sudokuGame.setTheElement("5,5,5");
+        sudokuGame.setTheElement("6,6,6");
+        sudokuGame.setTheElement("7,7,7");
+        sudokuGame.setTheElement("8,8,8");
+        sudokuGame.setTheElement("9,9,9");
+        sudokuGame.printSudokuBoard();
+        sudokuGame.resolveSudoku(sudokuGame.getSB());
         sudokuGame.printSudokuBoard();
 
-       sudokuGame.setTheElement("1,1,4");
-
-        sudokuGame.setTheElement("3,2,4");
-        sudokuGame.setTheElement("1,4,4");
-        sudokuGame.setTheElement("8,8,4");
-        sudokuGame.setTheElement("7,9,4");
-        sudokuGame.printSudokuBoard();
+    //    sudokuGame.printSudokuBoard();
 
         //Then
 

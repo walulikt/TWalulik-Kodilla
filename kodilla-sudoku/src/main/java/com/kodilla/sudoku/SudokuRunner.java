@@ -15,17 +15,24 @@ public class SudokuRunner {
             System.out.println (SudokuGame.SET_INPUT_INFORMATION);
             String userInput = scanner.nextLine();
             if (userInput.equals("SUDOKU")){
-                gameFinished = theGame.resolveSudoku();
-                theGame.printSudokuBoard();
+                boolean sudokuSolved = theGame.resolveSudoku(theGame.getSB());
+                if(sudokuSolved){
+                    theGame.printSudokuBoard();
+                    System.out.println ("Czy chcesz zagrać jeszcze raz (\"T\" lub \"EXIT\")?");
+                    userInput = scanner.nextLine();
+                    if(userInput.equals("T")) {
+                        theGame = new SudokuGame();
+                        continue;
+                    }
+                }
             } else if (userInput.equals("EXIT")){
                 gameFinished=true;
             } else {
                 try {
                     theGame.setTheElement(userInput);
                 } catch (NumberFormatException e) {
-                    System.out.println("Nieprawidłowy format danych! Podaj liczby w formacie '1,3,4' lub napisz SUDOKU, żeby rozwiązać zadanie");
+                    System.out.println("Nieprawidłowy format danych! Podaj liczby w formacie '1,3,4' lub napisz SUDOKU, żeby rozwiązać zadanie. Żeby zakończyć grę wpisz EXIT.");
                 }
-                theGame.printSudokuBoard();
             }
         }
 

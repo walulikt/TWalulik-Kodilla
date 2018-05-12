@@ -14,6 +14,15 @@ public class ElementValidator {
         return sudokuBoard;
     }
 
+    public boolean userInputCheck (int columnNumber, int rowNumber, int elementValue){
+        boolean userInputCheck = true;
+        if ((columnNumber>8||columnNumber<0)||(rowNumber>8||rowNumber<0)||(elementValue>9||elementValue<1)){
+            System.out.println("Jedna z podanych wartości (kolumna, wiersz lub warość) jest z poza zakresu 1-9. Spróbuj ponownie");
+            userInputCheck = false;
+        }
+        return userInputCheck;
+    }
+
     public boolean columnElementValidator(int columnNumber, int rowNumber, int elementValue){
         boolean elementValueChecked=false;
         for (int rowIndex=0 ; rowIndex<9; rowIndex++)
@@ -37,7 +46,7 @@ public class ElementValidator {
         return elementValueChecked;
     }
 
-    public boolean checkColumnsInSquere(int rowToCheck, int columnToCheck, int elemntValue){
+    private boolean checkColumnsInSquere(int rowToCheck, int columnToCheck, int elemntValue){
         boolean valueChecked;
         if (sudokuBoard.getBoard().get(rowToCheck).getRow().get(columnToCheck).getValue()==elemntValue){
             return valueChecked=true;
@@ -46,78 +55,78 @@ public class ElementValidator {
         }
     }
 
-    public boolean positionEValidator(int columnNrOfTheElement, int rowNrOfTheElement, int elementValue){
+    public boolean positionEValidator(int valColumnIndex, int valRowIndex, int elementValue){
         boolean elementValueChecked=true;
 
-        if ((columnNrOfTheElement==0 || columnNrOfTheElement==3 || columnNrOfTheElement==6) &&
-                (rowNrOfTheElement==0||rowNrOfTheElement==3 ||rowNrOfTheElement==6)){
-            for (int r = rowNrOfTheElement+1; r<(rowNrOfTheElement+3); r++){
-                if (checkColumnsInSquere(r,(columnNrOfTheElement+1),elementValue)||
-                        checkColumnsInSquere(r,(columnNrOfTheElement+2),elementValue)){
+        if ((valColumnIndex==0 || valColumnIndex==3 || valColumnIndex==6) &&
+                (valRowIndex==0||valRowIndex==3 ||valRowIndex==6)){
+            for (int r = valRowIndex+1; r<(valRowIndex+3); r++){
+                if (checkColumnsInSquere(r,(valColumnIndex+1),elementValue)||
+                        checkColumnsInSquere(r,(valColumnIndex+2),elementValue)){
                     return elementValueChecked = false;
                 }
             }
-        } else if ((columnNrOfTheElement==1 || columnNrOfTheElement==4 || columnNrOfTheElement==7) &&
-                (rowNrOfTheElement==1|| rowNrOfTheElement==4 || rowNrOfTheElement==7)){
-            for(int r = rowNrOfTheElement-1; r<(rowNrOfTheElement+2); r+=2) {
-                if (checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)||
-                        checkColumnsInSquere(r,columnNrOfTheElement+1,elementValue)){
+        } else if ((valColumnIndex==1 || valColumnIndex==4 || valColumnIndex==7) &&
+                (valRowIndex==1|| valRowIndex==4 || valRowIndex==7)){
+            for(int r = valRowIndex-1; r<(valRowIndex+2); r+=2) {
+                if (checkColumnsInSquere(r,valColumnIndex-1,elementValue)||
+                        checkColumnsInSquere(r,valColumnIndex+1,elementValue)){
                     return elementValueChecked = false;
                 }
             }
-        } else if ((columnNrOfTheElement==2 ||columnNrOfTheElement==5 ||columnNrOfTheElement==8) &&
-                (rowNrOfTheElement==2||rowNrOfTheElement==5 ||rowNrOfTheElement==8)){
-            for(int r = rowNrOfTheElement-2; r<rowNrOfTheElement; r++) {
-                if (checkColumnsInSquere(r,columnNrOfTheElement-2,elementValue)||
-                        checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)){
+        } else if ((valColumnIndex==2 ||valColumnIndex==5 ||valColumnIndex==8) &&
+                (valRowIndex==2||valRowIndex==5 ||valRowIndex==8)){
+            for(int r = valRowIndex-2; r<valRowIndex; r++) {
+                if (checkColumnsInSquere(r,valColumnIndex-2,elementValue)||
+                        checkColumnsInSquere(r,valColumnIndex-1,elementValue)){
                     return elementValueChecked = false;
                 }
             }
-        } else if((columnNrOfTheElement==0 ||columnNrOfTheElement==3 ||columnNrOfTheElement==6 &&
-                rowNrOfTheElement==1||rowNrOfTheElement==4 ||rowNrOfTheElement==7)) {
-            for(int r = rowNrOfTheElement-1; r<rowNrOfTheElement+2; r+=2) {
-                if (checkColumnsInSquere(r,columnNrOfTheElement+1,elementValue)||
-                        checkColumnsInSquere(r,columnNrOfTheElement+2,elementValue)){
+        } else if((valColumnIndex==0 ||valColumnIndex==3 ||valColumnIndex==6) &&
+                (valRowIndex==1||valRowIndex==4 ||valRowIndex==7)) {
+            for(int r = valRowIndex-1; r<valRowIndex+2; r+=2) {
+                if (checkColumnsInSquere(r,valColumnIndex+1,elementValue)||
+                        checkColumnsInSquere(r,valColumnIndex+2,elementValue)){
                     return elementValueChecked = false;
                 }
             }
-        } else if ((columnNrOfTheElement==0 ||columnNrOfTheElement==3 ||columnNrOfTheElement==6) &&
-                (rowNrOfTheElement==2||rowNrOfTheElement==5 ||rowNrOfTheElement==8)){
-            for(int r = rowNrOfTheElement-2; r<rowNrOfTheElement; r++) {
-                if (checkColumnsInSquere(r,columnNrOfTheElement+1,elementValue)||
-                        checkColumnsInSquere(r,columnNrOfTheElement+2,elementValue)){
+        } else if ((valColumnIndex==0 ||valColumnIndex==3 ||valColumnIndex==6) &&
+                (valRowIndex==2||valRowIndex==5 ||valRowIndex==8)){
+            for(int r = valRowIndex-2; r<valRowIndex; r++) {
+                if (checkColumnsInSquere(r,valColumnIndex+1,elementValue)||
+                        checkColumnsInSquere(r,valColumnIndex+2,elementValue)){
                     return elementValueChecked = false;
                 }
             }
-        } else if ((columnNrOfTheElement==1 ||columnNrOfTheElement==4 ||columnNrOfTheElement==7) &&
-                (rowNrOfTheElement==0||rowNrOfTheElement==3 ||rowNrOfTheElement==6)) {
-            for(int r = rowNrOfTheElement+1; r<rowNrOfTheElement+3; r++) {
-                if (checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)||
-                        checkColumnsInSquere(r,columnNrOfTheElement+1,elementValue)){
+        } else if ((valColumnIndex==1 ||valColumnIndex==4 ||valColumnIndex==7) &&
+                (valRowIndex==0||valRowIndex==3 ||valRowIndex==6)) {
+            for(int r = valRowIndex+1; r<valRowIndex+3; r++) {
+                if (checkColumnsInSquere(r,valColumnIndex-1,elementValue)||
+                        checkColumnsInSquere(r,valColumnIndex+1,elementValue)){
                     return elementValueChecked = false;
                 }
             }
-        } else if ((columnNrOfTheElement==1 ||columnNrOfTheElement==4 ||columnNrOfTheElement==7) &&
-                (rowNrOfTheElement==2||rowNrOfTheElement==5 ||rowNrOfTheElement==8)){
-            for(int r = rowNrOfTheElement-2; r<rowNrOfTheElement; r++) {
-                if (checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)||
-                        checkColumnsInSquere(r,columnNrOfTheElement+1,elementValue)){
+        } else if ((valColumnIndex==1 ||valColumnIndex==4 ||valColumnIndex==7) &&
+                (valRowIndex==2||valRowIndex==5 ||valRowIndex==8)){
+            for(int r = valRowIndex-2; r<valRowIndex; r++) {
+                if (checkColumnsInSquere(r,valColumnIndex-1,elementValue)||
+                        checkColumnsInSquere(r,valColumnIndex+1,elementValue)){
                     return elementValueChecked = false;
                 }
             }
-        } else if ((columnNrOfTheElement==2 || columnNrOfTheElement==5 ||columnNrOfTheElement==8) &&
-                (rowNrOfTheElement==0||rowNrOfTheElement==3 ||rowNrOfTheElement==6)){
-            for(int r = rowNrOfTheElement+1; r<rowNrOfTheElement+3; r++) {
-                if (checkColumnsInSquere(r,columnNrOfTheElement-2,elementValue)||
-                        checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)){
+        } else if ((valColumnIndex==2 || valColumnIndex==5 ||valColumnIndex==8) &&
+                (valRowIndex==0||valRowIndex==3 ||valRowIndex==6)){
+            for(int r = valRowIndex+1; r<valRowIndex+3; r++) {
+                if (checkColumnsInSquere(r,valColumnIndex-2,elementValue)||
+                        checkColumnsInSquere(r,valColumnIndex-1,elementValue)){
                     return elementValueChecked = false;
                 }
             }
-        } else if ((columnNrOfTheElement==2 ||columnNrOfTheElement==5 ||columnNrOfTheElement==8) &&
-                (rowNrOfTheElement==1||rowNrOfTheElement==4 ||rowNrOfTheElement==7)) {
-            for(int r = rowNrOfTheElement-1; r<rowNrOfTheElement+2; r+=2) {
-                if (checkColumnsInSquere(r,columnNrOfTheElement-2,elementValue) ||
-                checkColumnsInSquere(r,columnNrOfTheElement-1,elementValue)){
+        } else if ((valColumnIndex==2 ||valColumnIndex==5 ||valColumnIndex==8) &&
+                (valRowIndex==1||valRowIndex==4 ||valRowIndex==7)) {
+            for(int r = valRowIndex-1; r<valRowIndex+2; r+=2) {
+                if (checkColumnsInSquere(r,valColumnIndex-2,elementValue) ||
+                checkColumnsInSquere(r,valColumnIndex-1,elementValue)){
                     return elementValueChecked = false;
                 }
             }
