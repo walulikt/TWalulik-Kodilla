@@ -48,7 +48,7 @@ public class SudokuTestSuite {
         ElementValidator eV = new ElementValidator(sudokuGame.getSB());
 
         //When
-        sudokuGame.setTheElement("1,1,1");
+        /*sudokuGame.setTheElement("1,1,1");
 
         sudokuGame.setTheElement("2,1,5");
 
@@ -60,7 +60,7 @@ public class SudokuTestSuite {
         sudokuGame.setTheElement("7,7,7");
         sudokuGame.setTheElement("8,8,8");
         sudokuGame.setTheElement("9,9,9");
-        sudokuGame.printSudokuBoard();
+        sudokuGame.printSudokuBoard();*/
         sudokuGame.resolveSudoku(sudokuGame.getSB());
         sudokuGame.printSudokuBoard();
 

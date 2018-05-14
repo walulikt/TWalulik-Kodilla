@@ -14,10 +14,6 @@ public class SudokuGame {
     private int rowIndex;
     private int elementValue;
 
-    public ElementValidator getElementValidator() {
-        return elementValidator;
-    }
-
     public SudokuBoard getSB() {
         return sB;
     }
@@ -43,25 +39,31 @@ public class SudokuGame {
         return isSet;
     }
 
+    public boolean resolvingElementValidator(int valColumnIndex, int valRowIndex, int elementValue){
+            if (elementValidator.columnResElValidator(valColumnIndex, elementValue) && elementValidator.rowResElValidator(valRowIndex, elementValue) &&
+                    elementValidator.positionEValidator(valColumnIndex, valRowIndex, elementValue)) {
+                sB.getBoard().get(valRowIndex).getRow().get(valColumnIndex).setValue(elementValue);
+                return true;
+            }
+             return false;
+    }
+
     public void printSudokuBoard (){
         for (SudokuRow r: sB.getBoard())
             System.out.println(r);
     }
 
     public boolean resolveSudoku(SudokuBoard sB) {
-        for (int row=1;row<10;row++){
-            for (int column=1; column<10; column++){
-                if(sB.getBoard().get(row-1).getRow().get(column-1).getValue()==0) {
+        System.out.println("Komputer rozwiązuje sudoku");
+        for (int row=0;row<9;row++){
+            for (int column=0; column<9; column++){
+                if(sB.getBoard().get(row).getRow().get(column).getValue()==0) {
                     for (int e = 1; e < 10; e++) {
-                        String checkPositionValue = column+","+row+","+e;
-
-                        if (setTheElement(checkPositionValue)&&
+                        if (resolvingElementValidator(column, row, e) &&
                                 resolveSudoku(sB)) {
-                            sB.getBoard().get(row-1).getRow().get(column-1).setValue(e);
                             return true;
                         }
-                        sB.getBoard().get(row-1).getRow().get(column-1).setValue(0);
-                     //   System.out.println("wartość "+ sB.getBoard().get(row).getRow().get(column)+" wyzerowana");
+                        sB.getBoard().get(row).getRow().get(column).setValue(0);
                     }
                     return false;
                 }

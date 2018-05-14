@@ -15,49 +15,45 @@ public class ElementValidator {
     }
 
     public boolean userInputCheck (int columnNumber, int rowNumber, int elementValue){
-        boolean userInputCheck = true;
         if ((columnNumber>8||columnNumber<0)||(rowNumber>8||rowNumber<0)||(elementValue>9||elementValue<1)){
             System.out.println("Jedna z podanych wartości (kolumna, wiersz lub warość) jest z poza zakresu 1-9. Spróbuj ponownie");
-            userInputCheck = false;
+            return false;
         }
-        return userInputCheck;
+        return true;
     }
 
     public boolean columnElementValidator(int columnNumber, int rowNumber, int elementValue){
         boolean elementValueChecked=false;
-        for (int rowIndex=0 ; rowIndex<9; rowIndex++)
-            if (sudokuBoard.getBoard().get(rowIndex).getRow().get(columnNumber).getValue()==elementValue) {
-                System.out.println("Niedozwolona wartość (" + elementValue + ") dla pozycji kolumna: " + (columnNumber+1) + ", wiersz: " + (rowNumber+1) + '\n'
+        for (int rowIndex=0 ; rowIndex<9; rowIndex++) {
+            if (sudokuBoard.getBoard().get(rowIndex).getRow().get(columnNumber).getValue() == elementValue) {
+                System.out.println("Niedozwolona wartość (" + elementValue + ") dla pozycji kolumna: " + (columnNumber + 1) + ", wiersz: " + (rowNumber + 1) + '\n'
                         + "Taka wartość występuje już w tej kolumnie. Wprowadź dane jeszcze raz!");
-                elementValueChecked=false;
+                elementValueChecked = false;
                 break;
-            } else { elementValueChecked=true; }
+            } else {
+                elementValueChecked = true;
+            }
+        }
         return elementValueChecked;
     }
 
     public boolean rowElementValidator(int columnNumber, int rowNumber, int elementValue){
-        boolean elementValueChecked= false;
         SudokuRow sudokuRow = sudokuBoard.getBoard().get(rowNumber);
         if(sudokuRow.getRow().stream().map(sE->sE.getValue()).collect(Collectors.toList()).contains(elementValue)){
             System.out.println("Niedozwolona wartość (" + elementValue + ") dla pozycji kolumna: " + (columnNumber+1) + ", wiersz: " + (rowNumber+1) + '\n'
                     + "Taka wartość występuje już w tym wierszu. Wprowadź dane jeszcze raz!");
-            elementValueChecked=false;
-        } else { elementValueChecked=true; }
-        return elementValueChecked;
+            return false;
+        } return true;
     }
 
     private boolean checkColumnsInSquere(int rowToCheck, int columnToCheck, int elemntValue){
-        boolean valueChecked;
-        if (sudokuBoard.getBoard().get(rowToCheck).getRow().get(columnToCheck).getValue()==elemntValue){
-            return valueChecked=true;
-        } else {
-            return valueChecked = false;
-        }
+        if (sudokuBoard.getBoard().get(rowToCheck).getRow().get(columnToCheck).getValue()==elemntValue)
+            return true;
+        else return false;
     }
 
     public boolean positionEValidator(int valColumnIndex, int valRowIndex, int elementValue){
         boolean elementValueChecked=true;
-
         if ((valColumnIndex==0 || valColumnIndex==3 || valColumnIndex==6) &&
                 (valRowIndex==0||valRowIndex==3 ||valRowIndex==6)){
             for (int r = valRowIndex+1; r<(valRowIndex+3); r++){
@@ -132,5 +128,22 @@ public class ElementValidator {
             }
         }
     return elementValueChecked;
+    }
+
+    public boolean columnResElValidator(int valColumnIndex, int elementValue){
+        boolean validated = true;
+        for (int rowIndex=0 ; rowIndex<9; rowIndex++) {
+            if (sudokuBoard.getBoard().get(rowIndex).getRow().get(valColumnIndex).getValue() == elementValue) {
+                validated= false;
+                break;
+            } else validated =true;
+        }
+        return validated;
+    }
+
+    public boolean rowResElValidator(int valRowIndex, int elementValue){
+        SudokuRow sudokuRow = sudokuBoard.getBoard().get(valRowIndex);
+        if(sudokuRow.getRow().stream().map(sE->sE.getValue()).collect(Collectors.toList()).contains(elementValue))return false;
+        return true;
     }
 }

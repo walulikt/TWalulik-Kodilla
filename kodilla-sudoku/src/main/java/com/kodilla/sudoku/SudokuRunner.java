@@ -15,10 +15,13 @@ public class SudokuRunner {
             System.out.println (SudokuGame.SET_INPUT_INFORMATION);
             String userInput = scanner.nextLine();
             if (userInput.equals("SUDOKU")){
+               // long begin = System.currentTimeMillis();
                 boolean sudokuSolved = theGame.resolveSudoku(theGame.getSB());
+              //  long end = System.currentTimeMillis();
+              //  System.out.println("Czas rowiązania sudoku: " + (begin-end) + "ms");
                 if(sudokuSolved){
                     theGame.printSudokuBoard();
-                    System.out.println ("Czy chcesz zagrać jeszcze raz (\"T\" lub \"EXIT\")?");
+                    System.out.println ("SUDOKU rozwiązane:). Czy chcesz zagrać jeszcze raz (\"T\" lub \"EXIT\")?");
                     userInput = scanner.nextLine();
                     if(userInput.equals("T")) {
                         theGame = new SudokuGame();

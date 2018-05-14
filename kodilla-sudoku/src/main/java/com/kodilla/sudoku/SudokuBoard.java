@@ -18,22 +18,9 @@ public class SudokuBoard{
         }
     }
 
-    public SudokuRow getSudokuRow() {
-        return sudokuRow;
-    }
-
-    public void setSudokuRow(SudokuRow sudokuRow) {
-        this.sudokuRow = sudokuRow;
-    }
-
     public List<SudokuRow> getBoard() {
         return board;
     }
-
-    public void setBoard(List<SudokuRow> board) {
-        this.board = board;
-    }
-
 
     @Override
     public String toString () {
@@ -42,21 +29,5 @@ public class SudokuBoard{
             stringOfElements += board.get(i).toString();
         }
         return stringOfElements;
-    }
-    public SudokuBoard shallowCopy() throws CloneNotSupportedException {
-        return (SudokuBoard)super.clone();
-    }
-
-    public SudokuBoard deepCopy() throws CloneNotSupportedException {
-        SudokuBoard clonedBoard = (SudokuBoard)super.clone();
-        clonedBoard.setBoard(new ArrayList<>());
-        for (SudokuRow theRow: clonedBoard.getBoard()) {
-            SudokuRow clonedRow = new SudokuRow();
-            for (SudokuElement element : theRow.getRow()){
-                clonedRow.getRow().add(element);
-            }
-            clonedBoard.getBoard().add(clonedRow);
-        }
-        return clonedBoard;
     }
 }
